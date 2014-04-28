@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contacts</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+  		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  		<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8">
+
+            // Wait for device API libraries to load
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            // device APIs are available
+
+            function onDeviceReady() {
+                // find all contacts with 'Bob' in any name field
+                var options = new ContactFindOptions();
+                options.filter = "";
+                options.multiple = true;
+                var fields = ["displayName"];
+                navigator.contacts.find(fields, onSuccess, onError, options);
+            }
+
+            // onSuccess: Get a snapshot of the current contacts
+
+            var loaded = false;
+
+			// onSuccess: Get a snapshot of the current contacts
+			function onSuccess(contacts) {
+				$("#frame").html('<fieldset data-role="controlgroup"><legend>Select who you want to follow:</legend></fieldset>');
+			    for (var i=0; i<contacts.length; i++) {
+			        if (contacts[i].displayName) {  // many contacts don't have displayName
+			            //names.push(contacts[i].displayName);
+			        	//$('#contactList').append('<li data-icon="plus"><a class = "follow" href="#">' + contacts[i].displayName + '</a></li>');
+			        	// $('#contactList')..append(
+			         //        $('<input/>', {
+			         //                'type': 'checkbox',
+			         //                'name': contacts[i],
+			         //                'id': contacts[i],
+			         //                'value': contacts[i],
+			         //                'data-theme': 'd'
+			         //            })
+			         //            .append(
+			         //                $('<label/>', {
+			         //                    'for': contacts[i]
+			         //                })
+			         //                .text(contacts[i].displayName)
+			         //        )
+			         //    );
+						$("fieldset").append('<input type="checkbox" name="' + contacts[i].displayName + '" id="id' + i + '"><label for="id' + i + '">' + contacts[i].displayName + '</label>');
+			        }
+			    }
+			    $("#frame").append('<a href="#" data-role="button" data-inline="true" id="btndelcat">Continue</a>');
+			    $("#frame").trigger("create");
+			    loaded = true;
+			    //alert('contacts loaded');
+			}
+
+			// $('.follow').on('click', function(){
+			// 	$(this).removeClass("follow");
+			// 	$(this).addClass("unfollow");
+			//     $(this).attr("data-icon", "minus");
+			//     $('#contactList').listview('refresh');
+			// });
+
+			// $('.unfollow').on('click', function(){
+			// 	$(this).removeClass("unfollow");
+			// 	$(this).addClass("follow");
+			//     $(this).attr("data-icon", "minus");
+			//     $('#contactList').listview('refresh');
+			// });
+
+            // onError: Failed to get the contacts
+
+            function onError(contactError) {
+                alert('onError!');
+            }
+
+
+        </script>
+    </head>
+
+    <body>
+        <div data-role="page" id="contacts">
+
+		  <div data-role="header">
+		    <h1>Contacts</h1>
+		  </div><!-- /header -->
+
+		  <div data-role = "content">
+		  		<div id = "frame"></div>
+		  </div>
+		</div>
+    </body>
+</html>

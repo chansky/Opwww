@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Pie Chart</title>
+  
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+  
+  
+  
+  
+  <script type="text/javascript" src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.js"></script>
+  
+  
+  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+  <style type='text/css'>
+    
+  </style>
+  
+
+
+<script type='text/javascript'>//<![CDATA[ 
+
+$(function () {
+
+    var pollTitle = "What should I get to eat?";
+
+    var options = [];
+    options.push("burger");
+    options.push("salad");
+    options.push("pasta");
+    options.push("pizza");
+    options.push("burrito");
+    options.push("soup");
+    options.push("birthday cake");
+
+    var votes = [];
+    votes.push(3);
+    votes.push(1);
+    votes.push(4);
+    votes.push(6);
+    votes.push(2);
+    votes.push(1);
+    votes.push(5);
+
+    var totalVotes = 0;
+
+    for (var i = 0; i < votes.length; i++) {
+        totalVotes += votes[i];
+    }
+
+    var percentages = [];
+    var best = -1;
+    for (i = 0; i < votes.length; i++) {
+        percentages[i] = votes[i] / totalVotes;
+        if (percentages[i] > best) {
+            best = percentages[i];
+        }
+    }
+    var ser = [];
+    ser = generateData(options, percentages);
+
+    function generateData(opts, percs) {
+        var s = [];
+        for (var i = 0; i < opts.length; i++) {
+            if (percs[i] === best) {
+                s[i] = {
+                    name: opts[i],
+                    y: percs[i],
+                    sliced: true,
+                    selected: true
+                };
+            } else {
+                s[i] = [opts[i], percs[i]];
+            }
+        }
+        return s;
+    }
+    // Make monochrome colors and set them as default for all pies
+    Highcharts.getOptions().plotOptions.pie.colors = (function () {
+        var colors = [],
+            base = Highcharts.getOptions().colors[Math.floor((Math.random()*10))],
+            i;
+
+        for (i = 0; i < options.length; i++) {
+            // Start out with a darkened base color (negative brighten), and end
+            // up with a much brighter color
+            colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
+        }
+        return colors;
+    }());
+
+    // Build the chart
+    $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: pollTitle
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Percentage',
+            data: ser
+        }]
+    });
+});
+//]]>  
+
+</script>
+
+
+</head>
+<body>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+  
+</body>
+
+
+</html>
+

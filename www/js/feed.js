@@ -45,9 +45,9 @@ function loader(){
 
 		$.get("https://web.engr.illinois.edu/~opinio2014/feed.php",function(data){
 
-
+				//window.alert(data);
 			var obj = jQuery.parseJSON( data );
-
+				//window.alert(obj);
 				for(var i = 0; i < obj.length; i++) {
 					//window.alert("hi ben");
 					//$("#temp").append(obj[i].username+"<br>");

@@ -7,16 +7,19 @@ function register(){
 	$("#registerForm").on("submit",function(e){
 		//$("$registerButton",this).attr("disabled","disabled");
 		//document.write("inside register");
-		var ph = "2672301309";
+		var n = $("#name").val();
+		var ph = $("#phonenumber").val();
 		var em = $("#email",this).val();
 		var u = $("#username",this).val();
 		var p = $("#password",this).val();
 		if(em!='' && u!='' && p!=''){
 			//TODO: field validation
-			$.post("https://web.engr.illinois.edu/~mtmarsh2/register.php",{phonenumber:ph,email:em,username:u,password:p},function(res){
-				// if(res[1] === 't'){
-				 	window.location = "index.html";
-				// }
+			$.post("https://web.engr.illinois.edu/~opinio2014/register.php",{fullname:n,phonenumber:ph,email:em,username:u,password:p},function(res){
+				//document.write(res);
+				//if(res[1] === 't'){
+					window.alert(res);
+				 	window.location = "testcontacts.html";
+				//}
 				// else{
 				// 	navigator.notification.alert("Username exists",function(){});		
 				// }

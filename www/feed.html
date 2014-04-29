@@ -19,13 +19,16 @@
                         #follow:after { background:  url("icons/55-network.png") 50% 50% no-repeat;  background-size: 20px 24px; }
                         #skull:after { background:  url("icons/21-skull.png") 50% 50% no-repeat;  background-size: 22px 24px; }
                 </style>
+
+                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
                 <script type="text/javascript">
                         $(document).bind("mobileinit", function() {
                             $.support.cors = true;
                             $.mobile.allowCrossDomainPages = true;
                         });
                 </script>
-                <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                
                 <script type="text/javascript">
                         $(document).on('pageinit', function(event){
                           $('div.ui-page').on("swipeleft", function () {

@@ -44,25 +44,31 @@ function loader(){
 		var dataLength=0;
 
 		$.get("https://web.engr.illinois.edu/~opinio2014/feed.php",function(data){
+			//window.alert(data.length);
+			if(data.length !==3 && data!= null && data!==undefined){    //VERY CRAPPY NULL CHECKER....
+				var obj = jQuery.parseJSON( data );
+					//window.alert(obj);
+					for(var i = 0; i < obj.length; i++) {
+						//window.alert("hi ben");
+						//$("#temp").append(obj[i].username+"<br>");
+						usernames.push(obj[i].username);
+						imgLinks.push(obj[i].imgLink);
+						//window.alert("pushed to both ");
+					}
+					//indow.alert(usernames[0]);
+				dataLength=usernames.length;
 
-				//window.alert(data);
-			var obj = jQuery.parseJSON( data );
-				//window.alert(obj);
-				for(var i = 0; i < obj.length; i++) {
-					//window.alert("hi ben");
-					//$("#temp").append(obj[i].username+"<br>");
-					usernames.push(obj[i].username);
-					imgLinks.push(obj[i].imgLink);
-					//window.alert("pushed to both ");
+
+
+					for (var j = 0; j < dataLength; j++) {   //not sure why this needs to be in the get
+						//window.alert(j);
+			    		$('#feedList').append('<li><a href=""><img src ="'+imgLinks[j]+'"/>' + usernames[j] + '</a></li>').listview('refresh');
+					}
 				}
-				//indow.alert(usernames[0]);
-			dataLength=usernames.length;
-
-
-
-				for (var j = 0; j < dataLength; j++) {   //not sure why this needs to be in the get
-					//window.alert(j);
-		    		$('#feedList').append('<li><a href=""><img src ="'+imgLinks[j]+'"/>' + usernames[j] + '</a></li>').listview('refresh');
+				else{
+					//window.alert("hi me");
+					var word="NO FOLLOWERS";
+					$('#feedList').append('<li><a href="">' + word + '</a></li>').listview('refresh');
 				}
 
 	//	window.alert("curr datalength: "+dataLength);

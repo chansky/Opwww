@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
         <head>
-        <meta name="viewport" content="width=320;user-scalable=no"/>
+                <meta name="viewport" content="width=320;user-scalable=no"/>
                 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
                 <title>Feed Screen</title>
                 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
@@ -45,12 +45,13 @@
                 </script>
                 <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
                 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+                <script type="text/javascript" charset="utf-8" src="js/feed.js"></script>
 
                 <script type="text/javascript">
-                    
+                        
                         function transition(){
-                        window.location = "createpoll.html";
-                    }
+                                window.location = "createpoll.html";
+                        }
 
                         function deleteUser(){
                                 $.post("https://web.engr.illinois.edu/~mtmarsh2/deleteuser.php", function(sql){
@@ -64,37 +65,57 @@
                                 window.location="updatePassword.html";
                         }
 
+                        function friendfeed(){
+                                window.location = "feed.html";
+                        }
+
+                        function createpoll(){
+                                window.location = "createpoll.html"
+                        }
+
+                        function myfeed(){
+                                window.location = "profile.html";
+                        }
+
+                        function popular(){
+                                window.location = "popular.html";
+                        }
+
                         function follow(){
                                 window.location = "follow.html";
-                        } 
+                        }
                 </script>
-    </head>
+        </head>
 
-    <body>
-                <script type="text/javascript" charset="utf-8" src="js/feed.js"></script>
-
+        <body>
                 <div data-role="page" id="feed">
                         <div data-role="header">
                         </div>
 
-                <div data-role="content">
-                    <ul id="feedList" data-role="listview"></ul>
-                </div>
+                        <!-- <div data-role="content">
+                                <h1>Feed Screen! Woot!</h1>
+                                <input type="button" value="Create Poll" id="changeButton" onClick="transition()"> 
+                                <input type="button" value="Delete User" id="deleteButton" onclick="deleteUser()"/> 
+                                <input type="button" value="Change Password" id="changePasswordButton" onclick="changePassword()"/>
+                        </div> -->
 
-                <script> loader(); </script>
-  
+                        <div data-role="content">
+                                <ul id="feedList" data-role="listview"></ul>
+                         </div>
+
+                        <script> loader(); </script>
 
                         <div data-role="footer" class="nav-glyphish-example" data-theme="b" data-position="fixed">
                             <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
                                     <ul>
-                                        <li><a href="feed.html" id="friendfeed" data-icon="custom">Feed</a></li>
-                                        <li><a href="createpoll.html" id="createpoll" data-icon="custom">Poll?</a></li>
-                                        <li><a href="myfeed.html" id="myfeed" data-icon="custom">Profile</a></li>
-                                        <li><a href="popular.html" id="popular" data-icon="custom">Popular</a></li>
+                                        <li><a id="friendfeed" data-icon="custom" onclick="friendfeed()">Feed</a></li>
+                                        <li><a id="createpoll" data-icon="custom" onclick="createpoll()">Poll?</a></li>
+                                        <li><a id="myfeed" data-icon="custom" onclick="myfeed()">Profile</a></li>
+                                        <li><a id="popular" data-icon="custom" onclick="popular()">Popular</a></li>
                                         <li><a id="follow" data-icon="custom" onclick="follow()">Follow</a></li>
                                     </ul>
                             </div>
                         </div>
                 </div> 
-    </body>
+        </body>
 </html>

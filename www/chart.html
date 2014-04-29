@@ -24,17 +24,18 @@
 <script type='text/javascript'>//<![CDATA[ 
 
 $(function () {
-
     var pollTitle = "What should I get to eat?";
 
     var options = [];
-    options.push("burger");
-    options.push("salad");
-    options.push("pasta");
-    options.push("pizza");
-    options.push("burrito");
-    options.push("soup");
-    options.push("birthday cake");
+        window.alert("about to call local storage");
+
+    var choices =localStorage.getItem("choiceTextArr");
+    //window.alert(localStorage.getItem("userArr"));
+    //window.alert(localStorage.getItem("choiceTextArr"));
+    var index=localStorage.getItem("selectedIndex");
+    options.push(choices[index]);
+    window.alert(options[0]);
+    window.alert("bed time if this is visible");
 
     var votes = [];
     votes.push(3);

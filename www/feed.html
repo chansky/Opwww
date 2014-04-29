@@ -106,7 +106,33 @@
                                 <ul id="feedList" data-role="listview"></ul>
                          </div>
 
+
                         <script> loader(); </script>
+
+                            <!-- this script below works for recognizing taps
+                         <script>
+                            $(document).on('vclick', '#feedList', function(){ 
+                                console.log("click");
+                                window.alert("tap");
+                            });
+                            </script>
+                        -->
+                       <!-- <script>
+                             $('feedList').live("click", function(event, ui) {
+                                console.log("updateVersion, selected = " + $(this).attr('id'));
+                              })
+                        </script>  -->
+                        <script>
+                            $('#feedList').delegate('li', 'vclick', function() {
+                               // window.alert("clicked");
+                                var index = $(this).index();
+                                //window.alert(index);
+                                //presentView(index);
+                                var selectedIndex;
+                                window.localStorage.setItem(selectedIndex, $(this).index())
+                                  window.location="chart.html";
+                            });
+                            </script>
 
                         <div data-role="footer" class="nav-glyphish-example" data-theme="b" data-position="fixed">
                             <div data-role="navbar" class="nav-glyphish-example" data-grid="d">

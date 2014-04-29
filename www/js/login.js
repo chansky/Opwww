@@ -13,11 +13,11 @@ function deviceReady(){
 		//document.write(p);
 		if(u!='' && p!=''){
 			$.post("https://web.engr.illinois.edu/~opinio2014/login.php",{username:u,password:p},function(res){ 
-				document.write(res);	
+				//document.write(res);	
 				if(res[1]==='t'){
 					//$(":mobile-pagecontainer").pagecontainer("change","some.html",{transition:"slide"},false);
 					$.get("https://web.engr.illinois.edu/~opinio2014/login.php",function(data){
-						document.write(data);
+						//document.write(data);
 					});
 						//console.log("wrote data:");
 
@@ -26,14 +26,14 @@ function deviceReady(){
 					var valoutput = u;
 					if(typeof(window.localStorage) != 'undefined'){ 
 						window.localStorage.setItem(keyinput,valoutput); 
-						console.log("stored username");
+						//console.log("stored username");
 
 					} 
 					else{ 
 						console.log("store FAILED");
 						throw "window.localStorage, not defined"; 
 					}
-					console.log("tryna segue");
+					//console.log("tryna segue");
 					window.location = "feed.html";
 				}
 

@@ -19,65 +19,60 @@
                 var options = new ContactFindOptions();
                 options.filter = "";
                 options.multiple = true;
-                var fields = ["displayName"];
+                var fields = ["displayName","phoneNumbers"];
+                window.alert("about to find contacts");
                 navigator.contacts.find(fields, onSuccess, onError, options);
+                window.alert("found contacts");
             }
 
             // onSuccess: Get a snapshot of the current contacts
 
             var loaded = false;
+            var pnums = [];
 
 			// onSuccess: Get a snapshot of the current contacts
 			function onSuccess(contacts) {
-				$("#frame").html('<fieldset data-role="controlgroup"><legend>Select who you want to follow:</legend></fieldset>');
-			    for (var i=0; i<contacts.length; i++) {
-			        if (contacts[i].displayName) {  // many contacts don't have displayName
-			            //names.push(contacts[i].displayName);
-			        	//$('#contactList').append('<li data-icon="plus"><a class = "follow" href="#">' + contacts[i].displayName + '</a></li>');
-			        	// $('#contactList')..append(
-			         //        $('<input/>', {
-			         //                'type': 'checkbox',
-			         //                'name': contacts[i],
-			         //                'id': contacts[i],
-			         //                'value': contacts[i],
-			         //                'data-theme': 'd'
-			         //            })
-			         //            .append(
-			         //                $('<label/>', {
-			         //                    'for': contacts[i]
-			         //                })
-			         //                .text(contacts[i].displayName)
-			         //        )
-			         //    );
-						$("fieldset").append('<input type="checkbox" name="' + contacts[i].displayName + '" id="id' + i + '"><label for="id' + i + '">' + contacts[i].displayName + '</label>');
-			        }
-			    }
-			    $("#frame").append('<a href="#" data-role="button" data-inline="true" id="btndelcat">Continue</a>');
+				window.alert(contacts.length);
+		   		for(var i=0; i<contacts.length; i++){
+		   			if(contacts[i].displayName){
+		   				if(contacts[i].phoneNumbers != null){
+		   					for(var j=0; j<contacts[i].phoneNumbers.length; j++){
+		   						pnums.push(parsenum(contacts[i].phoneNumbers[j].value));
+		   					}
+		   				}
+		   			}
+		   		}
+		   		//document.write(pnums.length);
+
+		   		$("#frame").html('<fieldset data-role="controlgroup"><legend>Select who you want to follow:</legend></fieldset>');
+		   		for(var i=0; i<pnums.length; i++){
+		   			//document.write(contacts[i].phoneNumbers.length)
+		   			 	$("fieldset").append('<input type="checkbox" name="' + pnums[i] + '" id="id' + i + '"><label for="id' + i + '">' + pnums[i] + '</label>');
+		   		}	
+		   		$("#frame").append('<a href="#" data-role="button" data-inline="true" id="btndelcat">Continue</a>');
 			    $("#frame").trigger("create");
 			    loaded = true;
-			    //alert('contacts loaded');
 			}
 
-			// $('.follow').on('click', function(){
-			// 	$(this).removeClass("follow");
-			// 	$(this).addClass("unfollow");
-			//     $(this).attr("data-icon", "minus");
-			//     $('#contactList').listview('refresh');
-			// });
+			function parsenum(pnum){
+				pnum = pnum.toString();
+				var num = "";
+				var count = 0;
+				var i = pnum.length-1;
 
-			// $('.unfollow').on('click', function(){
-			// 	$(this).removeClass("unfollow");
-			// 	$(this).addClass("follow");
-			//     $(this).attr("data-icon", "minus");
-			//     $('#contactList').listview('refresh');
-			// });
-
-            // onError: Failed to get the contacts
+				while(count != 10){
+					if(pnum.charAt(i) !== '-'){
+						num = pnum.charAt(i)+ num;
+						count++;
+					}
+					i--;
+				}
+				return num;
+			}   
 
             function onError(contactError) {
                 alert('onError!');
             }
-
 
         </script>
     </head>
@@ -87,7 +82,7 @@
 
 		  <div data-role="header">
 		    <h1>Contacts</h1>
-		  </div><!-- /header -->
+		  </div>
 
 		  <div data-role = "content">
 		  		<div id = "frame"></div>

@@ -18,12 +18,12 @@ function loader(){
 
 		var usernames=[];
 		var imgLinks=[];
+		var p_id=[];
 		var dataLength=0;
 		var c_id=[];
 		var choiceText=[];
 		var startime=[];
 		var endtime=[];
-		var v_id=[];
 		var orderNum=[];
 
 		$.get("https://web.engr.illinois.edu/~opinio2014/realFeed.php",function(data){
@@ -36,8 +36,9 @@ function loader(){
 						//$("#temp").append(obj[i].username+"<br>");
 						usernames.push(obj[i].username);
 						imgLinks.push(obj[i].imagepath);
+						//window.alert(obj[i].p_id);
+						p_id.push(obj[i].p_id);
 						c_id.push(obj[i].c_id);
-						v_id.push(obj[i].v_id);
 						choiceText.push(obj[i].choiceText);
 						startime.push(obj[i].startime);
 						endtime.push(obj[i].endtime);
@@ -60,18 +61,22 @@ function loader(){
 					var choiceTextArr= "choiceTextArr";
 					var startimeArr="startimeArr";
 					var endtimeArr="endtimeArr";
-					var v_idArr="v_idArr";
 					var orderNumArr= "orderNumArr";
+					var p_idArr= "p_idArr";
 					if(typeof(window.localStorage) != 'undefined'){ 
-						window.localStorage.setItem(userArr,usernames);
-						window.localStorage.setItem(c_idArr, c_id);
-						window.localStorage.setItem(choiceTextArr, choiceText);
-						window.localStorage.setItem(startimeArr, startime);
-						window.localStorage.setItem(endtimeArr, endtime);
-						window.localStorage.setItem(v_idArr, v_id);
-						window.localStorage.setItem(orderNumArr, orderNum);
+							//window.alert("about to stringify");
 
-						window.alert("stored data");
+						window.localStorage.setItem(userArr, JSON.stringify(usernames));
+
+						window.localStorage.setItem(c_idArr, JSON.stringify(c_id));
+						window.localStorage.setItem(choiceTextArr, JSON.stringify(choiceText));
+						window.localStorage.setItem(startimeArr, JSON.stringify(startime));
+						window.localStorage.setItem(endtimeArr, JSON.stringify(endtime));
+						window.localStorage.setItem(orderNumArr, JSON.stringify(orderNum));
+						//window.alert("p_id item 1: "+ p_id[0]);
+						window.localStorage.setItem(p_idArr, JSON.stringify(p_id));
+
+						//window.alert("stored data");
 					} 
 					else{ 
 						console.log("store FAILED");

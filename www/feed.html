@@ -124,11 +124,11 @@
                         </script>  -->
                         <script>
                             $('#feedList').delegate('li', 'vclick', function() {
-                               // window.alert("clicked");
+                                //window.alert("clicked");
                                 var index = $(this).index();
                                 //window.alert(index);
                                 //presentView(index);
-                                var selectedIndex;
+                                var selectedIndex="selectedIndex";
                                 window.localStorage.setItem(selectedIndex, $(this).index())
                                   window.location="chart.html";
                             });

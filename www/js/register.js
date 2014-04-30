@@ -17,8 +17,8 @@ function register(){
 			$.post("https://web.engr.illinois.edu/~opinio2014/register.php",{fullname:n,phonenumber:ph,email:em,username:u,password:p},function(res){
 				//document.write(res);
 				//if(res[1] === 't'){
-					window.alert(res);
-				 	window.location = "testcontacts.html";
+					//window.alert(res);
+				 	window.location = "contacts.html";
 				//}
 				// else{
 				// 	navigator.notification.alert("Username exists",function(){});		

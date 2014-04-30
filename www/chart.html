@@ -6,15 +6,9 @@
   <title>Pie Chart</title>
   
   <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-  
-  
-  
-  
-  <script type="text/javascript" src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.js"></script>
-  
-  
-  <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-  
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+    
   <style type='text/css'>
     
   </style>
@@ -24,27 +18,40 @@
 <script type='text/javascript'>//<![CDATA[ 
 
 $(function () {
+
+    var index=(localStorage.getItem("selectedIndex"));
+    //window.alert("index: "+index);
+    var pIDs = jQuery.parseJSON(localStorage.getItem("p_idArr"));
+    var pid=pIDs[index];
     var pollTitle = "What should I get to eat?";
-
+   // window.alert(pid);
     var options = [];
-        window.alert("about to call local storage");
-
-    var choices =localStorage.getItem("choiceTextArr");
-    //window.alert(localStorage.getItem("userArr"));
-    //window.alert(localStorage.getItem("choiceTextArr"));
-    var index=localStorage.getItem("selectedIndex");
-    options.push(choices[index]);
-    window.alert(options[0]);
-    window.alert("bed time if this is visible");
-
     var votes = [];
-    votes.push(3);
-    votes.push(1);
-    votes.push(4);
-    votes.push(6);
-    votes.push(2);
-    votes.push(1);
-    votes.push(5);
+
+           $.post("https://web.engr.illinois.edu/~opinio2014/getpollinfo.php",{pid:pid},function(res){ 
+                            //window.alert(res);
+                            //window.alert(jQuery.parseJSON(res));
+                            var obj = jQuery.parseJSON(res);
+                           // window.alert(obj);
+                           // window.alert("object 0 length: "+obj.length);
+                           // window.alert(obj[0].textt);
+                            pollTitle=obj[0].textt;
+                            //window.alert(pollTitle);
+
+                            for(var i =1; i<obj.length; i++){
+
+                                options.push(obj[i].textt);
+                                //window.alert("choice: "+obj[i].textt);
+                                votes.push(obj[i].numvotes);
+                                //window.alert("num votes: "+obj[i].numvotes);
+                            }
+                            //var choiceInfoArray=obj.
+
+
+
+
+
+
 
     var totalVotes = 0;
 
@@ -126,13 +133,32 @@ $(function () {
         }]
     });
 });
+
+
+
+
+           });
+
+   // var obj = jQuery.parseJSON(localStorage.getItem("choiceTextArr"));
+
+
+
+    //window.alert(options[0]);
+    //window.alert("bed time if this is visible");
+
+
+
 //]]>  
 
 </script>
 
 
+
 </head>
 <body>
+
+
+
   <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>

@@ -20,7 +20,10 @@
                 options.filter = "";
                 options.multiple = true;
                 var fields = ["displayName","phoneNumbers"];
+<<<<<<< HEAD
                 window.alert("about to find contacts");
+=======
+>>>>>>> ce3c7980b7366cf44b4ac1bc6f22880e368b1a2d
                 navigator.contacts.find(fields, onSuccess, onError, options);
                 window.alert("found contacts");
             }
@@ -32,7 +35,10 @@
 
 			// onSuccess: Get a snapshot of the current contacts
 			function onSuccess(contacts) {
+<<<<<<< HEAD
 				window.alert(contacts.length);
+=======
+>>>>>>> ce3c7980b7366cf44b4ac1bc6f22880e368b1a2d
 		   		for(var i=0; i<contacts.length; i++){
 		   			if(contacts[i].displayName){
 		   				if(contacts[i].phoneNumbers != null){

@@ -48,7 +48,7 @@ function deviceReady(){
 }
 
 function register(){
-	window.location="register.html";
+	window.location="contacts.html";
 }
 
 //TODO: implement preAuth so user can remain logged in

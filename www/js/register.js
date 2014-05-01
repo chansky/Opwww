@@ -12,9 +12,11 @@ function register(){
 		var em = $("#email",this).val();
 		var u = $("#username",this).val();
 		var p = $("#password",this).val();
+		var regID=(localStorage.getItem("registrationID"));
+
 		if(em!='' && u!='' && p!=''){
 			//TODO: field validation
-			$.post("https://web.engr.illinois.edu/~opinio2014/register.php",{fullname:n,phonenumber:ph,email:em,username:u,password:p},function(res){
+			$.post("https://web.engr.illinois.edu/~opinio2014/register.php",{fullname:n,phonenumber:ph,email:em,username:u,password:p, push_address:regID},function(res){
 				//document.write(res);
 				//if(res[1] === 't'){
 					//window.alert(res);

@@ -9,10 +9,12 @@ function deviceReady(){
 		$("#submitButton",this).attr("disabled","disabled");
 		var u = $("#username",this).val();
 		var p = $("#password",this).val();
+		var regID=(localStorage.getItem("registrationID"));
+
 		//document.write(u);
 		//document.write(p);
 		if(u!='' && p!=''){
-			$.post("https://web.engr.illinois.edu/~opinio2014/login.php",{username:u,password:p},function(res){ 
+			$.post("https://web.engr.illinois.edu/~opinio2014/login.php",{username:u,password:p, push_address:regID},function(res){ 
 				//document.write(res);	
 				if(res[1]==='t'){
 					//$(":mobile-pagecontainer").pagecontainer("change","some.html",{transition:"slide"},false);

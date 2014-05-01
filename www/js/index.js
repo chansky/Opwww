@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -37,6 +38,10 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+
+        var pushNotification = window.plugins.pushNotification;
+        pushNotification.register(app.successHandler, app.errorHandler,{"senderID":"1089522216708","ecb":"app.onNotificationGCM"});
+
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -45,5 +50,44 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    // result contains any message sent from the plugin call
+    successHandler: function(result) {
+        //alert('Callback Success! Result = '+result)
+    },
+
+    errorHandler:function(error) {
+        alert(error);
+    },
+
+    onNotificationGCM: function(e) {
+        switch( e.event )
+        {
+            case 'registered':
+                if ( e.regid.length > 0 )
+                {
+                    console.log("Regid " + e.regid);
+
+                 //   alert('registration id = '+e.regid);
+                  //  alert('length: ' + e.regid.length);
+                    var registrationID= "registrationID";
+                    window.localStorage.setItem(registrationID, e.regid);
+
+                }
+            break;
+ 
+            case 'message':
+              // this is the actual push notification. its format depends on the data model from the push server
+              alert('message = '+e.message+' msgcnt = '+e.msgcnt);
+            break;
+ 
+            case 'error':
+              alert('GCM error = '+e.msg);
+            break;
+ 
+            default:
+              alert('An unknown GCM event has occurred');
+              break;
+        }
     }
 };

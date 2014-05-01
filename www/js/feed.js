@@ -36,7 +36,7 @@ function loader(){
 						//$("#temp").append(obj[i].username+"<br>");
 						usernames.push(obj[i].username);
 						imgLinks.push(obj[i].imagepath);
-						//window.alert(obj[i].p_id);
+						//window.alert(obj[i].c_id);
 						p_id.push(obj[i].p_id);
 						c_id.push(obj[i].c_id);
 						choiceText.push(obj[i].choiceText);
